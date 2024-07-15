@@ -1,34 +1,37 @@
 <script>
+import { ref } from 'vue'
 import user from './user.vue'
+import filterUser from '@/composables/filterUser.js';
     export default{
-        data(){
-            return{
-                users : [ 
+        setup(){
+            const users = [ 
                 { summary: "sabero", EmailAdress: "saber@gmail", phonenumber: "23232322", location: "tunis", tags: "important" },
                 { summary: "ahmed", EmailAdress: "ahmed@gmail", phonenumber: "23200322", location: "ariana", tags: "customer" },
                 { summary: "asma", EmailAdress: "asma@gmail", phonenumber: "28800322", location: "bEJA", tags: "lead" }
-                ],
-                filtred : false ,
-                filtredUsers : [],
-                inputV : ''
-                
+                ]
+                const inputV = ref('')
+                let filtred = ref(false)
+                const filtredUsers = ref([])
+
+                const handleFilter = () => {
+                    
+                    filtredUsers.value = []
+                    filtred.value = true
+                    for ( let user of users){    
+                        
+                        if ( user.summary.includes(inputV.value)){
+                            filtredUsers.value.push(user)
+                            
+                        }
+                    }
+                }
+            return{
+                users  , inputV , filtred  , filtredUsers , handleFilter
             }
         },
         components : {
             user
-        },
-        methods : {
-            handleFilter(){
-                this.filtred = true
-                this.filtredUsers = []
-                for ( let user of this.users){
-                    if ( user.summary.startsWith(this.inputV)){
-                        this.filtredUsers.push(user)
-                    }
-                }
-            }
         }
-       
     }
 </script>
 <template>
@@ -47,7 +50,7 @@ import user from './user.vue'
     </table>
 <br>
 
-    <input type="text" placeholder="find user " ref="inputV" v-model="inputV" @change="handleFilter">
+    <input type="text" placeholder="find user "  v-model="inputV" @change="handleFilter">
     
     
 
