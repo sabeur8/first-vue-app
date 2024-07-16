@@ -1,38 +1,31 @@
-<script>
+<script setup>
 import { ref } from 'vue'
 import user from './user.vue'
-import filterUser from '@/composables/filterUser.js';
-    export default{
-        setup(){
-            const users = [ 
-                { summary: "sabero", EmailAdress: "saber@gmail", phonenumber: "23232322", location: "tunis", tags: "important" },
-                { summary: "ahmed", EmailAdress: "ahmed@gmail", phonenumber: "23200322", location: "ariana", tags: "customer" },
-                { summary: "asma", EmailAdress: "asma@gmail", phonenumber: "28800322", location: "bEJA", tags: "lead" }
-                ]
-                const inputV = ref('')
-                let filtred = ref(false)
-                const filtredUsers = ref([])
+    
+const users = [ 
+    { summary: "sabero", EmailAdress: "saber@gmail", phonenumber: "23232322", location: "tunis", tags: "important" },
+    { summary: "ahmed", EmailAdress: "ahmed@gmail", phonenumber: "23200322", location: "ariana", tags: "customer" },
+    { summary: "asma", EmailAdress: "asma@gmail", phonenumber: "28800322", location: "bEJA", tags: "lead" }
+    ]
 
-                const handleFilter = () => {
-                    
-                    filtredUsers.value = []
-                    filtred.value = true
-                    for ( let user of users){    
-                        
-                        if ( user.summary.includes(inputV.value)){
-                            filtredUsers.value.push(user)
-                            
-                        }
-                    }
-                }
-            return{
-                users  , inputV , filtred  , filtredUsers , handleFilter
-            }
-        },
-        components : {
-            user
+const inputV = ref('')
+let filtred = ref(false)
+const filtredUsers = ref([])
+
+const handleFilter = () => {
+    filtredUsers.value = []
+    filtred.value = true
+    
+    for ( let user of users){    
+        if ( user.summary.includes(inputV.value)){
+        filtredUsers.value.push(user)
         }
     }
+}
+
+        
+    
+    
 </script>
 <template>
     <table class="users">

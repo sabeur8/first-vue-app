@@ -1,17 +1,17 @@
-<script>
-    export default{
-        props : [ 'user']
-    }
+<script setup>
+const props = defineProps(['user'])
 </script>
+
 <template>
     <tr >
-    <td class="user">{{ user.summary }}</td>
+    <td class="user">{{ props.user.summary }}</td>
     <td class="user">{{ user.EmailAdress }}</td>
     <td class="user">{{ user.phonenumber }}</td>
     <td class="user">{{ user.location }}</td>
     <td class="user">{{ user.tags }}</td>
     </tr>
 </template>
+
 <style>
 .user
 {
