@@ -1,6 +1,6 @@
 # user-app-vue
 
-This template should help get you started developing with Vue 3 in Vite.
+this app allows you to search for a user in user's table
 
 ## Recommended IDE Setup
 
